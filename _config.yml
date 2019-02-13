@@ -3,13 +3,15 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-keywords:
-author: John Doe
+title: eagle
+subtitle: 悲观谨慎，保持敬畏
+description: 河师大12级，java后端工作三年。
+keywords: "java,后端,骑行"
+author: dlj
+email: 2622973494@qq.com
 language:
 timezone:
+
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -82,3 +84,22 @@ deploy:
   type: git
   repo: git@github.com:dinglianju/dinglianju.github.io.git
   branch: master
+  
+jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
