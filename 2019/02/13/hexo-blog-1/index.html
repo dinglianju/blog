@@ -6,19 +6,60 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/2 | eagle</title>
+  <title>使用hexo搭建个人博客，实现不同电脑协作 | eagle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="河师大12级，java后端工作三年。">
-<meta name="keywords" content="java,后端,骑行">
-<meta property="og:type" content="website">
-<meta property="og:title" content="eagle">
-<meta property="og:url" content="http://yoursite.com/archives/2019/02/index.html">
+  <meta name="description" content="假设现在有两台电脑：电脑A、电脑B ###在电脑A上新建blog并进行如下操作：1.在github上新建个人博客仓库    新建hexo分支并设置为默认分支，clone到本地电脑2.hexo init blog命令执行及生成文件3.npm install 命令执行及生成文件4.复制第2、3步执行命令生成的文件到个人博客仓库中5.hexo generate 命令生成html页面6.在hexo分支上把">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用hexo搭建个人博客，实现不同电脑协作">
+<meta property="og:url" content="http://yoursite.com/2019/02/13/hexo-blog-1/index.html">
 <meta property="og:site_name" content="eagle">
-<meta property="og:description" content="河师大12级，java后端工作三年。">
+<meta property="og:description" content="假设现在有两台电脑：电脑A、电脑B ###在电脑A上新建blog并进行如下操作：1.在github上新建个人博客仓库    新建hexo分支并设置为默认分支，clone到本地电脑2.hexo init blog命令执行及生成文件3.npm install 命令执行及生成文件4.复制第2、3步执行命令生成的文件到个人博客仓库中5.hexo generate 命令生成html页面6.在hexo分支上把">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo1.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo2.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo3.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo4.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/13/hexo-blog-1/hexo5.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo6.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo7.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/git1.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/git2.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/git3.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo8.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo9.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo10.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo11.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo12.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo13.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/pre1.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/pre2.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/pre3.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/git4.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo13.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/git5.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team1.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team2.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team3.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team4.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team5.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/13/hexo-blog-1/team6.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team7.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team8.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team9.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team10.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team11.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team12.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/git6.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team13.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team14.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/team15.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/hexo_blog/git15.png">
+<meta property="og:updated_time" content="2019-02-13T10:20:44.076Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="eagle">
-<meta name="twitter:description" content="河师大12级，java后端工作三年。">
+<meta name="twitter:title" content="使用hexo搭建个人博客，实现不同电脑协作">
+<meta name="twitter:description" content="假设现在有两台电脑：电脑A、电脑B ###在电脑A上新建blog并进行如下操作：1.在github上新建个人博客仓库    新建hexo分支并设置为默认分支，clone到本地电脑2.hexo init blog命令执行及生成文件3.npm install 命令执行及生成文件4.复制第2、3步执行命令生成的文件到个人博客仓库中5.hexo generate 命令生成html页面6.在hexo分支上把">
+<meta name="twitter:image" content="http://yoursite.com/assets/blogImg/hexo_blog/hexo1.png">
   
     <link rel="alternative" href="/atom.xml" title="eagle" type="application/atom+xml">
   
@@ -158,36 +199,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-hexo-blog-1" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/13/hexo-blog-1/" class="archive-article-date">
-  	<time datetime="2019-02-13T10:12:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/13/hexo-blog-1/">使用hexo搭建个人博客，实现不同电脑协作</a>
+    <h1 class="article-title" itemprop="name">
+      使用hexo搭建个人博客，实现不同电脑协作
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/02/13/hexo-blog-1/" class="archive-article-date">
+  	<time datetime="2019-02-13T10:12:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>假设现在有两台电脑：电脑A、电脑B</p>
+<p>###在电脑A上新建blog并进行如下操作：<br>1.在github上新建个人博客仓库<br>    新建hexo分支并设置为默认分支，clone到本地电脑<br>2.hexo init blog命令执行及生成文件<br><img src="/assets/blogImg/hexo_blog/hexo1.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/hexo2.png" alt="生成文件"><br>3.npm install 命令执行及生成文件<br><img src="/assets/blogImg/hexo_blog/hexo3.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/hexo4.png" alt="生成文件"><br>4.复制第2、3步执行命令生成的文件到个人博客仓库中<br><img src="hexo5.png" alt="复制后git仓库文件目录"><br>5.hexo generate 命令生成html页面<br><img src="/assets/blogImg/hexo_blog/hexo6.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/hexo7.png" alt="生成文件"><br>6.在hexo分支上把更新提交到远端<br>git add .<br>git commit -m “hexo源文件提交”<br>git push origin<br><img src="/assets/blogImg/hexo_blog/git1.png" alt="本地文件"><br><img src="/assets/blogImg/hexo_blog/git2.png" alt="gitignore"><br><img src="/assets/blogImg/hexo_blog/git3.png" alt="github提交文件"><br>7.修改_config.yml配置，使用hexo deploy命令发布blog<br>    执行npm install hexo-deployer-git –save<br>    执行npm i hexo-generator-json-content –save<br><img src="/assets/blogImg/hexo_blog/hexo8.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/hexo9.png" alt="生成文件"><br>    修改_config.yml配置<br><img src="/assets/blogImg/hexo_blog/hexo10.png" alt="修改"><br>    执行hexo deploy命令，把blogHTML文件发布到github的master分支<br><img src="/assets/blogImg/hexo_blog/hexo11.png" alt="修改"><br>    输入生成ssh时设置的密码<br><img src="/assets/blogImg/hexo_blog/hexo12.png" alt="修改"><br>    执行命令后仓库目录结构<br><img src="/assets/blogImg/hexo_blog/hexo13.png" alt="生成文件"><br>8.预览效果<br><img src="/assets/blogImg/hexo_blog/pre1.png" alt="预览效果"><br>9.本地预览效果<br>    执行 hexo server<br><img src="/assets/blogImg/hexo_blog/pre2.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/pre3.png" alt="预览效果"><br>10.在hexo分支提交修改到远端<br>    git commit -a -m “使用默认模板的示例blog源码提交”<br>    git push origin hexo<br><img src="/assets/blogImg/hexo_blog/git4.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/hexo13.png" alt="本地分支目录"><br><img src="/assets/blogImg/hexo_blog/git5.png" alt="github分支目录"></p>
+<p>###在电脑B上给blog换一个主题yilia<br>1.在本地clone该blog仓库<br><img src="/assets/blogImg/hexo_blog/team1.png" alt="clone仓库"><br><img src="/assets/blogImg/hexo_blog/team2.png" alt="文件目录"><br>2.在该目录下执行命令生成相关依赖<br>    执行npm install<br>    执行npm install hexo-deployer-git –save<br>    执行npm i hexo-generator-json-content –save<br><img src="/assets/blogImg/hexo_blog/team3.png" alt="文件目录"><br>3.执行生成预览命令<br>    hexo g<br>    hexo s<br><img src="/assets/blogImg/hexo_blog/team4.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/team5.png" alt="文件目录"><br><img src="team6.png" alt="预览"><br>4.换主题为yilia<br>    执行hexo clean<br>    clone yilia主题放在themes目录<br>    删除yilia目录下的.git目录<br><img src="/assets/blogImg/hexo_blog/team7.png" alt="命令执行"><br><img src="/assets/blogImg/hexo_blog/team8.png" alt="文件目录"><br>    修改_config.yml文件中的主题配置<br><img src="/assets/blogImg/hexo_blog/team9.png" alt="修改"></p>
+<p>5.生成预览<br>    执行hexo d -g<br>    执行hexo s -g<br>    <img src="/assets/blogImg/hexo_blog/team10.png" alt="执行"><br>    <img src="/assets/blogImg/hexo_blog/team11.png" alt="本地预览"><br>    <img src="/assets/blogImg/hexo_blog/team12.png" alt="blog预览"><br>6.在hexo分支提交修改到远端<br>    git add .<br>    git commit -a -m “使用yilia主题的示例blog源码提交”<br>    git push origin hexo<br>    <img src="/assets/blogImg/hexo_blog/git6.png" alt="github分支目录"></p>
+<p>###回到电脑A上自定义主题yilia<br>1.把github远端hexo分支中的修改pull到本地<br>    git pull<br>2.修改yilia相关配置<br><img src="/assets/blogImg/hexo_blog/team13.png" alt="修改"><br>3.生成预览<br>    执行hexo s -g<br>    执行hexo d -g<br>    <img src="/assets/blogImg/hexo_blog/team14.png" alt="本地预览"><br>    <img src="/assets/blogImg/hexo_blog/team15.png" alt="blog预览"><br>4.在hexo分支提交修改到远端<br>    git add .<br>    git commit -a -m “自定义yilia主题修改提交”<br>    git push origin hexo<br><img src="/assets/blogImg/hexo_blog/git15.png" alt="github分支目录"></p>
+<p>#参考文档<br><a href="https://segmentfault.com/a/1190000004947261" target="_blank" rel="noopener">手把手教你使用Hexo + Github Pages搭建个人独立博客</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -199,46 +244,117 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/13/hexo-blog-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/13/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-13T07:22:16.630Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/13/hello-world/">Hello World</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2019/02/13/hexo-blog-1/", 
+    sourceId: "hexo-blog-1",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -261,8 +377,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
