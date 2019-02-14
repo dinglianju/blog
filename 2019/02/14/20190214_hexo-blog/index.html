@@ -24,7 +24,14 @@
 <meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/pre1.png">
 <meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/pre3.png">
 <meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team2.png">
-<meta property="og:updated_time" content="2019-02-14T07:28:53.686Z">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team3.png">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team5.png">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team6.png">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team11.png">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team12.png">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team14.png">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190214/team15.png">
+<meta property="og:updated_time" content="2019-02-14T09:02:50.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="blog搭建过程">
 <meta name="twitter:description" content="工作以来一直有一种感觉，自己花费了很长时间解决的一个问题，以为自己记得很清楚，可是过了一段时间还是忘记了。从去年开始就想有一个可以记录自己解决的问题，学习，旅行，新尝试和一些思考的地方。搭建了一个个人blog，现记录一下搭建过程。">
@@ -170,42 +177,80 @@
       
         <p>工作以来一直有一种感觉，自己花费了很长时间解决的一个问题，以为自己记得很清楚，可是过了一段时间还是忘记了。<br>从去年开始就想有一个可以记录自己解决的问题，学习，旅行，新尝试和一些思考的地方。<br>搭建了一个个人blog，现记录一下搭建过程。</p>
 <a id="more"></a>
-<h2 id="使用github创建个人blog"><a href="#使用github创建个人blog" class="headerlink" title="使用github创建个人blog"></a><strong>使用github创建个人blog</strong></h2><p>1.安装git和nodejs<br>2.安装hexo<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd d:/hexo</span><br><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
-<p>3.初始化生成blog目录并预览<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line">npm install</span><br><span class="line">cd blog</span><br><span class="line">hexo generate</span><br><span class="line">hexo server # 可以在http://localhost:4000/ 查看</span><br></pre></td></tr></table></figure></p>
-<p>4.换主题并预览(以yilia主题为例)<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 下载yilia主题</span><br><span class="line">hexo clean</span><br><span class="line">git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br><span class="line"># 修改配置换主题</span><br><span class="line"># 修改hexo目录下的_config.yml配置文件中的theme属性，将其设置为yilia</span><br><span class="line"># 	theme: yilia</span><br><span class="line"># 更新并预览</span><br><span class="line">hexo g # 生成</span><br><span class="line">hexo s # 启动本地web服务器</span><br></pre></td></tr></table></figure></p>
-<p>5.设置ssh<br>    <em>生成ssh秘钥</em><br>        ssh-keygen -t rsa -C “<a href="mailto:dinglianju007@gmail.com" target="_blank" rel="noopener">dinglianju007@gmail.com</a>“ #生成新的key文件，邮箱地址填github地址<br>        接下来它会让设置使用该秘钥的密码，如果不需要直接回车<br>    <img src="/assets/blogImg/20190214/ssh1.png" alt=""><br>    <em>复制生成的公钥文件中内容，添加ssh key到github</em><br>    <img src="/assets/blogImg/20190214/ssh2.png" alt=""><br>    <em>验证</em><br>        ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a><br>6.在github上新建blog仓库，并设置github pages<br>    <img src="/assets/blogImg/20190214/blog1.png" alt=""><br>    <img src="/assets/blogImg/20190214/blog2.png" alt=""><br>7.部署hexo到github pages<br>方法一：使用hexo d<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 安装一个扩展</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm i hexo-generator-json-content --save</span><br><span class="line"># 修改_config.xml配置</span><br><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repo: git@github.com:dinglianju/dinglianju.github.io.git</span><br><span class="line">	branch: master</span><br><span class="line">jsonContent:</span><br><span class="line">    meta: false</span><br><span class="line">    pages: false</span><br><span class="line">    posts:</span><br><span class="line">      title: true</span><br><span class="line">      date: true</span><br><span class="line">      path: true</span><br><span class="line">      text: false</span><br><span class="line">      raw: false</span><br><span class="line">      content: false</span><br><span class="line">      slug: false</span><br><span class="line">      updated: false</span><br><span class="line">      comments: false</span><br><span class="line">      link: false</span><br><span class="line">      permalink: false</span><br><span class="line">      excerpt: false</span><br><span class="line">      categories: false</span><br><span class="line">      tags: true</span><br><span class="line"># 使用hexo 部署到github</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用github创建个人blog"><a href="#使用github创建个人blog" class="headerlink" title="使用github创建个人blog"></a><strong>使用github创建个人blog</strong></h2><p>1.安装git和nodejs</p>
+<p>2.安装hexo</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd d:/hexo</span><br><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+</code></pre><p>3.初始化生成blog目录并预览</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line">npm install</span><br><span class="line">cd blog</span><br><span class="line">hexo generate</span><br><span class="line">hexo server # 可以在http://localhost:4000/ 查看</span><br></pre></td></tr></table></figure>
+</code></pre><p>4.换主题并预览(以yilia主题为例)<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 下载yilia主题</span><br><span class="line">hexo clean</span><br><span class="line">git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br><span class="line"># 修改配置换主题</span><br><span class="line"># 修改hexo目录下的_config.yml配置文件中的theme属性，将其设置为yilia</span><br><span class="line"># 	theme: yilia</span><br><span class="line"># 更新并预览</span><br><span class="line">hexo g # 生成</span><br><span class="line">hexo s # 启动本地web服务器</span><br></pre></td></tr></table></figure></p>
+<p>5.设置ssh<br><em>生成ssh秘钥</em><br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 生成新的key文件，邮箱地址填github地址</span><br><span class="line">ssh-keygen -t rsa -C &quot;dinglianju007@gmail.com&quot; </span><br><span class="line"># 接下来它会让设置使用该秘钥的密码，如果不需要直接回车</span><br></pre></td></tr></table></figure></p>
+<p><img src="/assets/blogImg/20190214/ssh1.png" alt=""><br><em>复制生成的公钥文件中内容，添加ssh key到github</em></p>
+<p><img src="/assets/blogImg/20190214/ssh2.png" alt=""><br><em>验证</em></p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+</code></pre><p>6.在github上新建blog仓库，并设置github pages</p>
+<p><img src="/assets/blogImg/20190214/blog1.png" alt=""><br><img src="/assets/blogImg/20190214/blog2.png" alt=""></p>
+<p>7.部署hexo到github pages</p>
+<p>方法一：使用hexo d<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 安装一个扩展</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm i hexo-generator-json-content --save</span><br><span class="line"># 修改_config.xml配置</span><br><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repo: git@github.com:dinglianju/dinglianju.github.io.git</span><br><span class="line">	branch: master</span><br><span class="line">jsonContent:</span><br><span class="line">    meta: false</span><br><span class="line">    pages: false</span><br><span class="line">    posts:</span><br><span class="line">      title: true</span><br><span class="line">      date: true</span><br><span class="line">      path: true</span><br><span class="line">      text: false</span><br><span class="line">      raw: false</span><br><span class="line">      content: false</span><br><span class="line">      slug: false</span><br><span class="line">      updated: false</span><br><span class="line">      comments: false</span><br><span class="line">      link: false</span><br><span class="line">      permalink: false</span><br><span class="line">      excerpt: false</span><br><span class="line">      categories: false</span><br><span class="line">      tags: true</span><br><span class="line"># 使用hexo 部署到github</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
 <p>方法二：使用脚本把需要的文件自己提交到github上<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># clone 博客仓库</span><br><span class="line">cd d:/hexo/blog</span><br><span class="line">git clone https://github.com/dinglianju/dinglianju.github.io.git .deploy/dinglianju.github.io</span><br><span class="line"># 生成blog网站文件并复制到指定仓库中push到远端</span><br><span class="line">hexo generate</span><br><span class="line">cp -R public/* .deploy/dinglianju.github.io</span><br><span class="line">cd .deploy/dinglianju.github.io</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;update&quot;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p>
-<h2 id="在不同电脑协同写blog"><a href="#在不同电脑协同写blog" class="headerlink" title="在不同电脑协同写blog"></a><strong>在不同电脑协同写blog</strong></h2><p>假设现在有两台电脑：电脑A、电脑B<br><strong>在电脑A上新建blog并进行如下操作：</strong><br>1.登录github并新建个人博客仓库<br>    新建hexo分支并设置为默认分支(该分支用于保存博客网站所需的hexo源文件，及所有修改提交)，<br>    master分支用于使用hexo deploy命令发布使用。<br>    修改github pages设置。<br>    把这个仓库clone到本地，当前分支为hexo。<br>2.设置ssh<br>3.执行hexo init blog，生成hexo相关文件<br>    注意：生成的是一个git项目，包含.git目录、.gitignore文件和其他文件<br>4.执行npm install，安装node相关依赖<br>    注意：根据第二步生成的package.json文件下载依赖生成node_modules目录<br>5.复制第2、3步执行命令生成的文件（.git目录除外）到博客仓库中<br>    注意：保留博客仓库中原有的.git目录及里面内容<br>6.hexo generate 命令生成html页面<br>    注意：新生成了public目录<br>7.在hexo分支上把更新提交到远端<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;hexo源文件提交&quot;</span><br><span class="line">git push origin</span><br></pre></td></tr></table></figure></p>
-<p>注意：由于含有.gitignore文件，所以一些生成的文件及目录（如node_modules, public等）不用提交到github上<br>8.修改_config.yml配置，使用hexo deploy命令发布blog<br>    执行npm install hexo-deployer-git –save<br>    执行npm i hexo-generator-json-content –save<br>    修改_config.yml配置<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:dinglianju/dinglianju.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">jsonContent:</span><br><span class="line">    meta: false</span><br><span class="line">    pages: false</span><br><span class="line">    posts:</span><br><span class="line">      title: true</span><br><span class="line">      date: true</span><br><span class="line">      path: true</span><br><span class="line">      text: false</span><br><span class="line">      raw: false</span><br><span class="line">      content: false</span><br><span class="line">      slug: false</span><br><span class="line">      updated: false</span><br><span class="line">      comments: false</span><br><span class="line">      link: false</span><br><span class="line">      permalink: false</span><br><span class="line">      excerpt: false</span><br><span class="line">      categories: false</span><br><span class="line">      tags: true</span><br></pre></td></tr></table></figure></p>
-<p>执行hexo deploy命令，把博客HTML文件发布到github的master分支，<br>输入生成ssh时设置的密码，本地新生成.deploy_git目录<br><img src="/assets/blogImg/20190214/blog3.png" alt="目录结构"><br>8.预览效果<br><img src="/assets/blogImg/20190214/pre1.png" alt="预览效果"><br>9.本地预览效果<br>    执行 hexo server<br><img src="/assets/blogImg/20190214/pre3.png" alt="预览效果"><br>10.在hexo分支提交修改到远端<br>    git commit -a -m “使用默认模板的示例blog源码提交”<br>    git push origin hexo</p>
-<p><strong>在电脑B上给blog换一个主题yilia</strong><br>1.在本地clone该blog仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/dinglianju/dinglianju.github.io.git</span><br></pre></td></tr></table></figure></p>
-<p><img src="/assets/blogImg/20190214/team2.png" alt="文件目录"><br>2.在该目录下执行命令生成相关依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	npm install</span><br><span class="line">	npm install hexo-deployer-git --save</span><br><span class="line">	npm i hexo-generator-json-content --save</span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">![文件目录](team3.png)</span><br><span class="line">3.执行生成预览命令</span><br></pre></td></tr></table></figure></p>
-<pre><code>hexo g
-hexo s
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![文件目录](/assets/blogImg/20190214/team5.png)</span><br><span class="line">![预览](/assets/blogImg/20190214/team6.png)</span><br><span class="line">4.换主题为yilia</span><br></pre></td></tr></table></figure>
-<pre><code>hexo clean
-# clone yilia主题放在themes目录并
-git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia
-# 删除yilia目录下的.git目录
-# 修改_config.yml文件中的主题配置
-theme: yilia
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5.生成预览</span><br></pre></td></tr></table></figure>
-<pre><code>hexo g
-hexo d
-hexo s
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![本地预览](/assets/blogImg/20190214/team11.png)</span><br><span class="line">![blog预览](/assets/blogImg/20190214/team12.png)</span><br><span class="line">6.在hexo分支提交修改到远端</span><br></pre></td></tr></table></figure>
-<pre><code>git add .
-git commit -a -m &quot;使用yilia主题的示例blog源码提交&quot;
-git push origin hexo
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**回到电脑A上自定义主题yilia**</span><br><span class="line"></span><br><span class="line">1.把github远端hexo分支中的修改pull到本地</span><br><span class="line">	git pull</span><br><span class="line">2.修改yilia相关配置</span><br><span class="line">3.生成预览</span><br></pre></td></tr></table></figure>
-<pre><code>hexo g
-hexo s
-hexo d
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![本地预览](/assets/blogImg/20190214/team14.png)</span><br><span class="line">![blog预览](/assets/blogImg/20190214/team15.png)</span><br><span class="line">	</span><br><span class="line">4.在hexo分支提交修改到远端</span><br></pre></td></tr></table></figure>
-<pre><code>git add .
-git commit -a -m &quot;自定义yilia主题修改提交&quot;
-git push origin hexo
-</code></pre><p><code>`</code></p>
+<h2 id="在电脑A和电脑B上协同写blog"><a href="#在电脑A和电脑B上协同写blog" class="headerlink" title="在电脑A和电脑B上协同写blog"></a><strong>在电脑A和电脑B上协同写blog</strong></h2><p><strong>在电脑A上新建blog并进行如下操作：</strong></p>
+<p>1.登录github并新建个人博客仓库</p>
+<ul>
+<li>新建hexo分支并设置为默认分支(该分支用于保存博客网站所需的hexo源文件，及所有修改提交)。</li>
+<li>master分支用于使用hexo deploy命令发布使用。</li>
+<li>修改github pages设置，参考之前步骤。</li>
+<li>把这个仓库clone到本地，当前分支为hexo。</li>
+</ul>
+<p>2.设置ssh，参考之前步骤</p>
+<p>3.执行hexo init blog，生成hexo相关文件</p>
+<blockquote>
+<p>注意：生成的是一个git项目，包含.git目录、.gitignore文件和其他文件</p>
+</blockquote>
+<p>4.执行npm install，安装node相关依赖</p>
+<blockquote>
+<p>注意：根据第二步生成的package.json文件下载依赖生成node_modules目录</p>
+</blockquote>
+<p>5.复制第2、3步执行命令生成的文件（.git目录除外）到博客仓库中</p>
+<blockquote>
+<p>注意：保留博客仓库中原有的.git目录及里面内容</p>
+</blockquote>
+<p>6.hexo generate 命令生成html页面</p>
+<blockquote>
+<p>注意：新生成了public目录</p>
+</blockquote>
+<p>7.在hexo分支上把更新提交到远端</p>
+<blockquote>
+<p>注意：由于含有.gitignore文件，所以一些生成的文件及目录（如node_modules, public等）不用提交到github上</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;hexo源文件提交&quot;</span><br><span class="line">git push origin</span><br></pre></td></tr></table></figure>
+<p>8.安装发布相关插件，修改_config.yml配置</p>
+<ul>
+<li>执行<code>npm install hexo-deployer-git –save</code></li>
+<li>执行<code>npm i hexo-generator-json-content –save</code></li>
+<li>修改_config.yml配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:dinglianju/dinglianju.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">jsonContent:</span><br><span class="line">    meta: false</span><br><span class="line">    pages: false</span><br><span class="line">    posts:</span><br><span class="line">      title: true</span><br><span class="line">      date: true</span><br><span class="line">      path: true</span><br><span class="line">      text: false</span><br><span class="line">      raw: false</span><br><span class="line">      content: false</span><br><span class="line">      slug: false</span><br><span class="line">      updated: false</span><br><span class="line">      comments: false</span><br><span class="line">      link: false</span><br><span class="line">      permalink: false</span><br><span class="line">      excerpt: false</span><br><span class="line">      categories: false</span><br><span class="line">      tags: true</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>8.使用<code>hexo clean</code> <code> hexo g</code> <code>hexo deploy</code>命令发布到远端master分支</p>
+<ul>
+<li>输入生成ssh时设置的密码，本地新生成.deploy_git目录<br><img src="/assets/blogImg/20190214/blog3.png" alt="目录结构"></li>
+<li>站点预览<br><img src="/assets/blogImg/20190214/pre1.png" alt="预览效果"></li>
+</ul>
+<p>9.本地预览，执行 <code>hexo server</code><br><img src="/assets/blogImg/20190214/pre3.png" alt="预览效果"><br>10.在hexo分支提交修改到远端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit -a -m &quot;使用默认模板的示例blog源码提交&quot;</span><br><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure></p>
+<p><strong>在电脑B上给blog换一个主题yilia</strong></p>
+<p>1.在本地clone该blog仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/dinglianju/dinglianju.github.io.git</span><br></pre></td></tr></table></figure></p>
+<p><img src="/assets/blogImg/20190214/team2.png" alt="文件目录"></p>
+<p>2.在该目录下执行命令生成相关依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm i hexo-generator-json-content --save</span><br></pre></td></tr></table></figure></p>
+<p><img src="/assets/blogImg/20190214/team3.png" alt="文件目录"></p>
+<p>3.执行<code>hexo g</code>生成及<code>hexo s</code>预览命令，本地目录及预览图如下：<br><img src="/assets/blogImg/20190214/team5.png" alt="文件目录"><br><img src="/assets/blogImg/20190214/team6.png" alt="预览"></p>
+<p>4.换主题为yilia<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"># clone yilia主题放在themes目录并</span><br><span class="line">git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br><span class="line"># 删除yilia目录下的.git目录</span><br><span class="line"># 修改_config.yml文件中的主题配置</span><br><span class="line">theme: yilia</span><br></pre></td></tr></table></figure></p>
+<p>5.本地生成<code>hexo g</code> 预览<code>hexo s</code><br><img src="/assets/blogImg/20190214/team11.png" alt="本地预览"></p>
+<p>6.执行<code>hexo clean</code> <code>hexo g</code> <code>hexo d</code>命令发布并预览<br><img src="/assets/blogImg/20190214/team12.png" alt="blog预览"></p>
+<p>7.在hexo分支提交修改到远端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -a -m &quot;使用yilia主题的示例blog源码提交&quot;</span><br><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure></p>
+<p><strong>回到电脑A上自定义主题yilia</strong></p>
+<p>1.执行<code>git pull</code>把github远端hexo分支中的修改拉到本地</p>
+<p>2.撰写blog及修改yilia相关配置</p>
+<p>3.本地生成<code>hexo g</code> 预览<code>hexo s</code><br><img src="/assets/blogImg/20190214/team14.png" alt="本地预览"></p>
+<p>4.执行<code>hexo clean</code> <code>hexo g</code> <code>hexo d</code>命令发布并预览<br><img src="/assets/blogImg/20190214/team15.png" alt="blog预览"></p>
+<p>5.在hexo分支提交修改到远端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -a -m &quot;自定义yilia主题修改提交&quot;</span><br><span class="line">git push origin hexo</span><br></pre></td></tr></table></figure></p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h2><p><a href="https://segmentfault.com/a/1190000004947261" target="_blank" rel="noopener">手把手教你使用Hexo + Github Pages搭建个人独立博客</a><br><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">使用hexo，如何换了电脑怎么更新博客？</a></p>
 
       
@@ -288,25 +333,6 @@ git push origin hexo
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2019/02/14/20190214_hexo-blog-with-img/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          blog搭建过程
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/07/09/prevent-spiders/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">反击爬虫，前端工程师的脑洞可以有多大？</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -435,118 +461,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">html5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">旅行</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">coffeescript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">旧事</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">css3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">chrome</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">主题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">浏览器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">经验</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">产品</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">药别停</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">故事</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">性能</a>
               </li>
             
             <div class="clearfix"></div>
