@@ -2,15 +2,15 @@
 
 menu:
   主页: /
-  相册: /photos
+  #相册: /photos
   #相册: /photos_example
-  随笔: /tags/随笔/
+  #随笔: /tags/随笔/
 
 # SubNav
 subnav:
   github: "https://github.com/dinglianju"
-  weibo: "#"
-  rss: "#"
+  #weibo: "#"
+  #rss: "#"
   #zhihu: "#"
   #qq: "#"
   #weixin: "#"
