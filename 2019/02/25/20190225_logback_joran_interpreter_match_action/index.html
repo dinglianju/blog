@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://dinglianju.github.io">
-  <title>Archives: 2019/2 | eagle</title>
+  <title>joran的interpreter解析器解析SaxEvent及匹配Action | eagle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="河师大12级，java后端工作三年。">
-<meta name="keywords" content="java,后端,骑行">
-<meta property="og:type" content="website">
-<meta property="og:title" content="eagle">
-<meta property="og:url" content="https://dinglianju.github.io/archives/2019/02/index.html">
+  <meta name="description" content="interpreter解析器解析StartEvent、EndEvent、BodyEvent及查找匹配指定路径的标签对应的Action部分源码理解及梳理 标签路径相关接口和匹配策略在RuleStore接口及其子类中定义，第二种匹配策略应该存在bug">
+<meta name="keywords" content="源码,logback">
+<meta property="og:type" content="article">
+<meta property="og:title" content="joran的interpreter解析器解析SaxEvent及匹配Action">
+<meta property="og:url" content="https://dinglianju.github.io/2019/02/25/20190225_logback_joran_interpreter_match_action/index.html">
 <meta property="og:site_name" content="eagle">
-<meta property="og:description" content="河师大12级，java后端工作三年。">
+<meta property="og:description" content="interpreter解析器解析StartEvent、EndEvent、BodyEvent及查找匹配指定路径的标签对应的Action部分源码理解及梳理 标签路径相关接口和匹配策略在RuleStore接口及其子类中定义，第二种匹配策略应该存在bug">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-26T10:04:05.788Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="eagle">
-<meta name="twitter:description" content="河师大12级，java后端工作三年。">
+<meta name="twitter:title" content="joran的interpreter解析器解析SaxEvent及匹配Action">
+<meta name="twitter:description" content="interpreter解析器解析StartEvent、EndEvent、BodyEvent及查找匹配指定路径的标签对应的Action部分源码理解及梳理 标签路径相关接口和匹配策略在RuleStore接口及其子类中定义，第二种匹配策略应该存在bug">
   
     <link rel="alternative" href="/atom.xml" title="eagle" type="application/atom+xml">
   
@@ -138,78 +139,116 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-20190225_logback_joran_interpreter_match_action" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/20190226_logback_joran_statusPrint/" class="archive-article-date">
-  	<time datetime="2019-02-26T08:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/20190226_logback_joran_statusPrint/">ogback框架内日志处理(基于v_1.3.0-alpha4版本源码)</a>
+    <h1 class="article-title" itemprop="name">
+      joran的interpreter解析器解析SaxEvent及匹配Action
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logback</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/20190225_logback_joran_interpreter_match_action/" class="archive-article-date">
+        
+        <a href="/2019/02/25/20190225_logback_joran_interpreter_match_action/" class="archive-article-date">
   	<time datetime="2019-02-25T08:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/20190225_logback_joran_interpreter_match_action/">joran的interpreter解析器解析SaxEvent及匹配Action</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>interpreter解析器解析StartEvent、EndEvent、BodyEvent及查找匹配指定路径的标签对应的Action部分源码理解及梳理</p>
+<p>标签路径相关接口和匹配策略在RuleStore接口及其子类中定义，<em>第二种匹配策略应该存在bug</em></p>
+<a id="more"></a>
+<h2 id="路径匹配规则"><a href="#路径匹配规则" class="headerlink" title="路径匹配规则"></a><strong>路径匹配规则</strong></h2><p>当前路径elementPath ep：  a/b/c<br>规则对应的路径elementSelector es：（优先级按照如下顺序查找匹配的Action，找到则返回）</p>
+<p><strong>1. 按照当前路径和规则路径完全匹配</strong><br><code>fullPathMatch(ElementPath elementPath)</code></p>
+<ul>
+<li>a/b/c                &nbsp;&nbsp;    &lt;</li>
+<li>d/a/b/c</li>
+<li>a/b</li>
+</ul>
+<p><strong>2. 第一个是*通配符, 然后从后向前查找匹配路径最多的(可能有bug，测试如下情况选择了第三种，其实一种才是正确的匹配情况)</strong><br><code>suffixMatch(ElementPath elementPath)</code></p>
+<ul>
+<li>*/b/c            &nbsp;&nbsp;    2    &lt;?</li>
+<li>*/d/a/b            &nbsp;&nbsp;    0</li>
+<li>*/d/e/b/c        &nbsp;&nbsp;    2    &lt;?    &lt;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Action&gt; suffixMatch(ElementPath elementPath) &#123;</span><br><span class="line">    int max = 0;</span><br><span class="line">    ElementSelector longestMatchingElementSelector = null;</span><br><span class="line"></span><br><span class="line">    for (ElementSelector selector : rules.keySet()) &#123;</span><br><span class="line">        if (isSuffixPattern(selector)) &#123;</span><br><span class="line">            int r = selector.getTailMatchLength(elementPath);</span><br><span class="line">   		// bug修复：此处改为应添加(selector.size() - 1 == r)判断</span><br><span class="line">   		// if (selector.size() - 1 == r &amp;&amp; r &gt; max) &#123;</span><br><span class="line">            if (r &gt; max) &#123;</span><br><span class="line">                max = r;</span><br><span class="line">                longestMatchingElementSelector = selector;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (longestMatchingElementSelector != null) &#123;</span><br><span class="line">        return rules.get(longestMatchingElementSelector);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3. 最后一个是*通配符, 然后从前查找匹配路径最长并且es.size() - 1等于最大的匹配长度 </strong><br><code>prefixMatch(ElementPath elementPath)</code></p>
+<ul>
+<li>d/a/b/c/*            &nbsp;&nbsp;    0</li>
+<li>d/a/b/c/e/*        &nbsp;&nbsp;    0</li>
+<li>b/c/e/*            &nbsp;&nbsp;    0</li>
+<li>a/b/*                &nbsp;&nbsp;    2</li>
+<li>a/b/c/*            &nbsp;&nbsp;    3    &nbsp;&nbsp;    &lt;</li>
+<li>a/b/c/d/*            &nbsp;&nbsp;    3</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 注意：r == selector.size() - 1)</span><br><span class="line">// 加上这个判断是为了完全匹配</span><br><span class="line">List&lt;Action&gt; prefixMatch(ElementPath elementPath) &#123;</span><br><span class="line">    int max = 0;</span><br><span class="line">    ElementSelector longestMatchingElementSelector = null;</span><br><span class="line"></span><br><span class="line">    for (ElementSelector selector : rules.keySet()) &#123;</span><br><span class="line">        String last = selector.peekLast();</span><br><span class="line">        if (isKleeneStar(last)) &#123;</span><br><span class="line">            int r = selector.getPrefixMatchLength(elementPath);</span><br><span class="line">            // to qualify the match length must equal p&apos;s size omitting the &apos;*&apos;</span><br><span class="line">            if ((r == selector.size() - 1) &amp;&amp; (r &gt; max)) &#123;</span><br><span class="line">                max = r;</span><br><span class="line">                longestMatchingElementSelector = selector;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (longestMatchingElementSelector != null) &#123;</span><br><span class="line">        return rules.get(longestMatchingElementSelector);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4. 第一个和最后一个都是通配符, 然后匹配规则路径去除前后的*通配符, 判断当前路径ep.contain(es), 如果包含去es.size()最大的匹配路径的规则返回</strong><br><code>middleMatch(ElementPath path)</code>（可能存在bug, 通过ElementSelectorDemo测试，无bug，注意如下代码）</p>
+<ul>
+<li>*/a/b/c/*            &nbsp;&nbsp;    3    &lt;    &nbsp;&nbsp;    3</li>
+<li>*/d/a/b/c/*            &nbsp;&nbsp;    4    &lt;?    &nbsp;&nbsp;    0</li>
+<li>*/b/c/*                &nbsp;&nbsp;    0        &nbsp;&nbsp;    2</li>
+<li>*/b/*                &nbsp;&nbsp;    0        &nbsp;&nbsp;    1</li>
+<li>*/a/b/c/e/*            &nbsp;&nbsp;    4    &lt;?    &nbsp;&nbsp;    0</li>
+<li>*/*                    &nbsp;&nbsp;    0        &nbsp;&nbsp;    0</li>
+<li>*/d/a/b/c/e/*        &nbsp;&nbsp;    5    &lt;?    &nbsp;&nbsp;    0</li>
+<li>*/d/e/a/b/c/*        &nbsp;&nbsp;    5    &lt;?    &nbsp;&nbsp;    0</li>
+<li>*/a/b/c/d/e/*        &nbsp;&nbsp;    5    &lt;?    &nbsp;&nbsp;    0</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">// SimpleRuleStore类</span><br><span class="line">List&lt;Action&gt; middleMatch(ElementPath path) &#123;</span><br><span class="line"></span><br><span class="line">    int max = 0;</span><br><span class="line">    ElementSelector longestMatchingElementSelector = null;</span><br><span class="line"></span><br><span class="line">    for (ElementSelector selector : rules.keySet()) &#123;</span><br><span class="line">        String last = selector.peekLast();</span><br><span class="line">        String first = null;</span><br><span class="line">        if (selector.size() &gt; 1) &#123;</span><br><span class="line">            first = selector.get(0);</span><br><span class="line">        &#125;</span><br><span class="line">        if (isKleeneStar(last) &amp;&amp; isKleeneStar(first)) &#123;</span><br><span class="line">            List&lt;String&gt; copyOfPartList = selector.getCopyOfPartList();</span><br><span class="line">            if (copyOfPartList.size() &gt; 2) &#123;</span><br><span class="line">                copyOfPartList.remove(0);</span><br><span class="line">                copyOfPartList.remove(copyOfPartList.size() - 1);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            int r = 0;</span><br><span class="line">            ElementSelector clone = new ElementSelector(copyOfPartList);</span><br><span class="line">            if (clone.isContainedIn(path)) &#123;</span><br><span class="line">                r = clone.size();</span><br><span class="line">            &#125;</span><br><span class="line">            if (r &gt; max) &#123;</span><br><span class="line">                max = r;</span><br><span class="line">                longestMatchingElementSelector = selector;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (longestMatchingElementSelector != null) &#123;</span><br><span class="line">        return rules.get(longestMatchingElementSelector);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ElementSelector类</span><br><span class="line">// 注意：isContainedIn方法中是：当前路径p.contents(规则中的路径elementSelector)，而不是相反。说明如下：</span><br><span class="line">// 例如当前路径 p=&quot;/a/b/c&quot; </span><br><span class="line">// 规则中匹配路径 ps1=&quot;*/d/a/b/c/e/*&quot;, ps2=&quot;*/a/b/*</span><br><span class="line">// ps1和ps2去除前后的*通配符后，执行p.contains(ps2)，则路径ps2的规则匹配</span><br><span class="line">public boolean isContainedIn(ElementPath p) &#123;</span><br><span class="line">    if (p == null) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    return p.toStableString().contains(toStableString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a><strong>设计</strong></h2><p><strong>1. 对<em>xml标签元素路径</em>和<em>路径选择</em>两个需求的封装到ElementPath类和ElementSelector类的理解</strong></p>
+<p>&ensp;需要考虑解决的需求问题：<br>在使用sax解析xml文件为内存中的<code>SaxEventList</code>时需要考虑除了要保存标签内容、属性、名称、命名空间等这些封装到sax解析的过程中了，不需要joran框架考虑，<br>在joran中需要处理的是，解析后封装的<code>SaxEventList</code>中体现这些标签的所在位置（也就是路径，可以找到当前标签的父标签和子标签），这样可以通过对不同的路径的xml标签元素运用不同的处理策略（也就是Action）。<br>上面的问题清楚后需要对每一个标签执行匹配的规则，现在遍历<code>SaxEventList</code>列表，可以获取到当前SaxEvent元素的内容（包括：标签名、属性、命名空间、行列信息、路径信息）和所有的匹配规则ruleStore，设计时需要考虑解决的问题是：<br>对于saxEvent元素的路径，根据怎样的规则，匹配ruleStore规则中的路径，然后执行对应的规则。</p>
+<p>&ensp;joran解决这一问题的设计如下：<br>在SAX解析xml时是按照顺序解析的，joran使用<code>ArrayList saxEventList</code>来保存封装标签的SaxEvent元素，然后<code>saxEventList</code>中的顺序就体现了标签的路径；然后在Interpreter解析器中匹配规则的处理时，根据遍历到的SaxEvent元素的类型，使用一个栈类型的全局变量来解析当前元素的路径。<br>由于所有匹配规则保存在RuleStore中，所以在这个接口类中提供了<code>matchActions(ElementPath elementPath)</code>方法传入路径获取当前路径匹配的规则列表<code>List&lt;Action&gt;</code>，把具体的路径匹配处理过程封装起来在实现类SimpleRuleStore中实现。</p>
+<p>&ensp;路径匹配需求（是否有*通配符及通配符所在位置）确定四种匹配规则，按照优先级（按优先级只要有一个匹配上就返回）如下：</p>
+<ul>
+<li>无*通配符，完全匹配；</li>
+<li>前面有*通配符， 从后向前 查找去除通配符后匹配深度最长的，且路径长度等于匹配深度<code>(elementSelector.size() - 1 == r)</code>；<br>  &ensp;如当前路径为/a/b/c, 匹配路径如下：<ol>
+<li>*/b/c            &nbsp;&nbsp;    2    &nbsp;&nbsp;    &lt;?    &nbsp;&nbsp;    &lt;</li>
+<li>*/d/a/b            &nbsp;&nbsp;    0</li>
+<li>*/d/e/b/c        &nbsp;&nbsp;    2    &nbsp;&nbsp;    &lt;?    &nbsp;&nbsp;    <code>(elementSelector.size() - 1 = 3)</code></li>
+</ol>
+</li>
+<li>后面有*通配符， 从前向后 查找去除通配符后匹配深度最长的，且路径长度等于匹配深度<code>(elementSelector.size() - 1 == r)</code>；<br>  &ensp;如当前路径为/a/b/c, 匹配路径如下：<ol>
+<li>/a/c/*            &nbsp;&nbsp;    1</li>
+<li>/b/a/b/c/*        &nbsp;&nbsp;    0</li>
+<li>/a/b/*            &nbsp;&nbsp;    2    &lt;</li>
+<li>/a/b/e/*        &nbsp;&nbsp;    2        &nbsp;&nbsp;    <code>(elementSelector.size() - 1 = 3)</code></li>
+</ol>
+</li>
+<li>前后都有*通配符，去除前后的通配符，查找当前路径包含该路径则匹配的情况下，该路径最长的情况；<br>  &ensp;如当前路径为/a/b/c, 匹配路径如下：<ol>
+<li>*/a/b/c/*        &nbsp;&nbsp;    3    &nbsp;&nbsp;    &lt;</li>
+<li>*/b/c/*        &nbsp;&nbsp;    2</li>
+<li>*/d/b/c/*        &nbsp;&nbsp;    0</li>
+</ol>
+</li>
+<li>按照以上优先级先后顺序还未找到匹配的规则，则返回null；</li>
+</ul>
+<p><strong>2. 接口和实现类关系(RuleStore与SimpleRuleStore),  实现类与具体的处理类关系(SimpleRuleStore与ElementSelector)</strong></p>
+<p>&ensp;RuleStore接口设计的目的就是保存和查找匹配规则，所以它提供了如下两个添加rule的接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RuleStore</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">addRule</span><span class="params">(ElementSelector elementSelector, String actionClassStr)</span> <span class="keyword">throws</span> ClassNotFoundException</span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">addRule</span><span class="params">(ElementSelector elementSelector, Action action)</span></span>;</span><br><span class="line">	<span class="function">List&lt;Action&gt; <span class="title">matchActions</span><span class="params">(ElementPath elementPath)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&ensp;在其实现类SimpleRuleStore中需要考虑：</p>
+<ul>
+<li>把rule保存在哪里<br>  保存在<code>HashMap&lt;ElementSelector, List&lt;Action&gt;&gt; rules</code>，根据指定的匹配路径把Action分组。</li>
+<li>指定路径如何与rule关联起来，即：给定一个路径如何找到它的所有规则<br>  路径匹配的规则算法有四种，根据优先级把查找指定路径的Action封装到matchActions(ElementPath elementPath)方法中<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Action&gt; <span class="title">matchActions</span><span class="params">(ElementPath elementPath)</span> </span>&#123;</span><br><span class="line">    List&lt;Action&gt; actionList;</span><br><span class="line">    <span class="keyword">if</span> ((actionList = fullPathMatch(elementPath)) != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> actionList;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((actionList = suffixMatch(elementPath)) != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> actionList;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((actionList = prefixMatch(elementPath)) != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> actionList;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((actionList = middleMatch(elementPath)) != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> actionList;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&ensp;把相关更具体的处理过程提取封装到ElementSelector类中，封装为三个方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ElementSelector</span> <span class="keyword">extends</span> <span class="title">ElementPath</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 全匹配</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">fullPathMatch</span><span class="params">(ElementPath path)</span> </span>&#123;&#125;</span><br><span class="line">	<span class="comment">// */a/b/c</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTailMatchLength</span><span class="params">(ElementPath p)</span> </span>&#123;&#125;</span><br><span class="line">	<span class="comment">// */a/b/c/*</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isContainedIn</span><span class="params">(ElementPath p)</span> </span>&#123;&#125;</span><br><span class="line">	<span class="comment">// /a/b/c*</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPrefixMatchLength</span><span class="params">(ElementPath p)</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&ensp;这样的通过接口类（RuleStore）、实现类（SimpleRuleStore）、路径匹配类（ElementSelector其实就是一个工具类，但命名更符合领域编程）。对于查找路径对应的所有Action需求，</p>
+<p>通过RuleStore中的matchActions接口暴露给外界，外界只用关心出入值和返回值不用关心具体的匹配规则，在joran内部通过实现类SimpleRuleStore来实现rule的保存和匹配的具体工作。然后ElementSelector把更细的，涉及到对ElementPath类的操作，提取到ElementSelector（ElementPath的子类）中，这样可以使用继承的好处（可以减少方法的形参数量、在方法内部可以直接调用类的方法），<em>模块内部高内聚，模块外部低耦合</em>；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ElementSelector类内方法</span></span><br><span class="line"><span class="comment">// 减少了一个形参this，在方法内部直接使用toStableString()，调用this的相关方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isContainedIn</span><span class="params">(ElementPath p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p.toStableString().contains(toStableString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 节点路径类ElementPath和ElementSelector</strong></p>
+<p>&ensp;ElementPath封装了xml标签中特定标签的路径信息，它通过添加的顺序来确定当前标签的具体路径，这样就可以通过使用栈数据结构的推入（StartEvent类型推入）、弹出操作（EndEvent类型弹出），在遍历有顺序的SaxEventList列表确定<em>当前遍历元素</em>的路径（栈中当前所有的元素就是就为它的路径）。这有一个问题就是需要确定一个栈推入和弹出的触发条件，找到这个条件后就可以把<em>数据</em>和<em>处理程序</em>分开，在任何时候只要给了SaxEventList列表就可以传入程序进行解析。</p>
+<p>&ensp;这样ElementPath封装元素SaxEvent的路径信息，SAX解析xml把标签封装为SaxEvent对象并存入保存顺序的SaxEventList列表中，SaxEventList的顺序可以解析出来路径，解析过程在Interpreter解析中。这样就把所有的过程解耦开了，处理逻辑内聚到Interpreter解析器、ElementPath路径、<code>SaxEventRecorder.recordEvents(inputSource)</code>使用SAX解析xml并生成SaxEventList三个部分，<em>模块内部高内聚，模块外部低耦合</em>。</p>
+<p>&ensp;ElementSelector封装了对ElementPath路径的匹配选择，需要操作ElementPath中保存路径节点的列表，所以它如果可以直接访问<code>ElementPath.partList</code>属性和方法会更方便。所以它集成了ElementPath，是它的子类。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -225,149 +264,126 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://dinglianju.github.io/2019/02/25/20190225_logback_joran_interpreter_match_action/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/21/20190221_logback_joran_sax/" class="archive-article-date">
-  	<time datetime="2019-02-21T05:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-21</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/02/26/20190226_logback_joran_statusPrint/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ogback框架内日志处理(基于v_1.3.0-alpha4版本源码)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/21/20190221_logback_joran_sax/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">joran中使用SAX解析xml部分内容</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/21/20190221_logback_joran_sax/">joran中使用SAX解析xml部分内容</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://dinglianju.github.io/2019/02/25/20190225_logback_joran_interpreter_match_action/", 
+    sourceId: "20190225_logback_joran_interpreter_match_action",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logback</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sax</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">jaxp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/15/20190215_logback_joran_configurator/" class="archive-article-date">
-  	<time datetime="2019-02-15T08:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/15/20190215_logback_joran_configurator/">logback中配置解析组件joran源码解析</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logback</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/14/20190214_hexo-blog/" class="archive-article-date">
-  	<time datetime="2019-02-14T05:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/14/20190214_hexo-blog/">blog搭建过程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -390,8 +406,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

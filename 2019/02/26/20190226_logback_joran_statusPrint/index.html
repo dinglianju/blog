@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://dinglianju.github.io">
-  <title>Archives: 2019/2 | eagle</title>
+  <title>ogback框架内日志处理(基于v_1.3.0-alpha4版本源码) | eagle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="河师大12级，java后端工作三年。">
-<meta name="keywords" content="java,后端,骑行">
-<meta property="og:type" content="website">
-<meta property="og:title" content="eagle">
-<meta property="og:url" content="https://dinglianju.github.io/archives/2019/02/index.html">
+  <meta name="description" content="logback日志框架对外部使用者提供日志记录功能的封装，在框架内部处理出现的异常和记录日志信息，它使用StatusManager来处理。">
+<meta name="keywords" content="源码,logback">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ogback框架内日志处理(基于v_1.3.0-alpha4版本源码)">
+<meta property="og:url" content="https://dinglianju.github.io/2019/02/26/20190226_logback_joran_statusPrint/index.html">
 <meta property="og:site_name" content="eagle">
-<meta property="og:description" content="河师大12级，java后端工作三年。">
+<meta property="og:description" content="logback日志框架对外部使用者提供日志记录功能的封装，在框架内部处理出现的异常和记录日志信息，它使用StatusManager来处理。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190226/status_print_class_diagram.png">
+<meta property="og:image" content="https://dinglianju.github.io/assets/blogImg/20190226/status_print_sequence_chart.png">
+<meta property="og:updated_time" content="2019-02-26T10:00:53.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="eagle">
-<meta name="twitter:description" content="河师大12级，java后端工作三年。">
+<meta name="twitter:title" content="ogback框架内日志处理(基于v_1.3.0-alpha4版本源码)">
+<meta name="twitter:description" content="logback日志框架对外部使用者提供日志记录功能的封装，在框架内部处理出现的异常和记录日志信息，它使用StatusManager来处理。">
+<meta name="twitter:image" content="https://dinglianju.github.io/assets/blogImg/20190226/status_print_class_diagram.png">
   
     <link rel="alternative" href="/atom.xml" title="eagle" type="application/atom+xml">
   
@@ -138,36 +142,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-20190226_logback_joran_statusPrint" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      ogback框架内日志处理(基于v_1.3.0-alpha4版本源码)
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/20190226_logback_joran_statusPrint/" class="archive-article-date">
+
+        
+        <a href="/2019/02/26/20190226_logback_joran_statusPrint/" class="archive-article-date">
   	<time datetime="2019-02-26T08:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/20190226_logback_joran_statusPrint/">ogback框架内日志处理(基于v_1.3.0-alpha4版本源码)</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>logback日志框架对外部使用者提供日志记录功能的封装，在框架内部处理出现的异常和记录日志信息，它使用StatusManager来处理。</p>
+<a id="more"></a>
+<h2 id="1-对Logback中status的理解"><a href="#1-对Logback中status的理解" class="headerlink" title="1.对Logback中status的理解"></a><strong>1.对Logback中status的理解</strong></h2><p>logback是一个日志处理框架，只要在项目中引入logback的jar包依赖、正确填写日志的配置文件，然后就可以在项目引入log进行日志记录。这样在项目中就可以吧日志信息的格式化，日志信息保存位置，日志输出级别的复杂性交给日志框架来处理。status的作用也是记录日志信息，只不过它是框架内部对于项目的日志配置文件解析和校验以及项目对日志接口的使用出现错误时，把错误信息输出到控制台通知调试人员。</p>
+<h2 id="2-类图"><a href="#2-类图" class="headerlink" title="2.类图"></a><strong>2.类图</strong></h2><p><img src="/assets/blogImg/20190226/status_print_class_diagram.png" alt="status_print类图"></p>
+<h2 id="3-时序图"><a href="#3-时序图" class="headerlink" title="3.时序图"></a><strong>3.时序图</strong></h2><p><img src="/assets/blogImg/20190226/status_print_sequence_chart.png" alt="status_print时序图"></p>
+<h2 id="4-处理逻辑"><a href="#4-处理逻辑" class="headerlink" title="4.处理逻辑"></a><strong>4.处理逻辑</strong></h2><ul>
+<li>所有实现ContextAware接口的类，可以调用addWarn、addInfo、addError接口把框架在解析运行过程中出现的日志信息包装成Status（message, level, throwable, date, origin, childrenList）对象，这样实现可以记录一条日志在什么时间（date）、什么地方（origin）、什么内容（message throwable）、与其他日志的关系信息包装到Status中；</li>
+<li>在客户端中调用addWarn、addInfo、addError接口包装日志信息到Status对象中；</li>
+<li>在ContextAware的addStatus(Status status)接口中从context中获取StatusManager对象；</li>
+<li>把包装日志信息的Status添加到StatusManager对象的集合中；</li>
+<li>在客户端需要查看日志信息时调用StatusPrinter类中的printInCaseOfErrorsOrWarnings(context)接口，从context中获取StatusManager对象；</li>
+<li>从StatusManager对象中获取保存的所有日志status；</li>
+<li>根据日志级别和时间过滤status集合，并格式化每条信息调用printStream的print输出；</li>
+</ul>
+<h2 id="5-功能模块"><a href="#5-功能模块" class="headerlink" title="5.功能模块"></a><strong>5.功能模块</strong></h2><p><strong>重要模块</strong></p>
+<pre><code>+ StatusManager及其子类是status-print模块的中心，负责日志status的存储管理。
++ Status及其子类继承体系抽象了要记录的日志，以方便表示、存储、使用。
++ contextAware及其子类，在定义了记录日志的接口，整个框架中大部分模块（Action等）多有继承，方便在有记录日志需求的地方使用。
++ StatusPrinter和StatusUtil工具类，在需要输出已记录的日志时通过定义的静态方法方便打印日志到控制台等其他终端，判断指定时间内指定级别日志是否存在。
++ Context的子类ContextBase中保存有StatusManager的引用，以方便在整个框架中获取。
+</code></pre><p><strong>性能优化</strong><br>    在BasicStatusManager类中，当日志条数超过150条时，把接下来的日志添加到tailBuffer的CyclicBuffer环形数组中（对CyclicBuffer类的理解）<br>    接口实现、抽象类、子类</p>
+<pre><code>+ ContextAware接口中定义了必要的方法接口，在子类ContextAwareBase中实现ContextAware接口中方法，根据接口中方法的作用意义，ContextAwareBase中引入Context的依赖；
++ Status接口中国定义日志需要的必要方法（添加，删除，遍历等）及日志的三个级别，在子类StatusBase中具体定义日志的五个属性并实现Status接口中的方法，在具体的如ErrorStatus类实现StatusBase类，只是通过构造方法设置level区分不同的级别；
++ StatusManager接口定义保存保存日志Status接口相关的方法接口，在子类BasicStatusManager中具体定义保存Status的集合并实现StatusManager中的方法
+</code></pre><p><strong>使用实例</strong></p>
+<p>ContextAware的子类GenericConfigurator：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">doConfigure</span><span class="params">(File file)</span> <span class="keyword">throws</span> JoranException </span>&#123;</span><br><span class="line">    FileInputStream fis = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        URL url = file.toURI().toURL();</span><br><span class="line">        informContextOfURLUsedForConfiguration(getContext(), url);</span><br><span class="line">        fis = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">        doConfigure(fis, url.toExternalForm());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</span><br><span class="line">        String errMsg = <span class="string">"Could not open ["</span> + file.getPath() + <span class="string">"]."</span>;</span><br><span class="line">        addError(errMsg, ioe);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> JoranException(errMsg, ioe);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (fis != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                fis.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (java.io.IOException ioe) &#123;</span><br><span class="line">                String errMsg = <span class="string">"Could not close ["</span> + file.getName() + <span class="string">"]."</span>;</span><br><span class="line">                addError(errMsg, ioe);</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> JoranException(errMsg, ioe);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ContextAware的子类SaxEventRecorder：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;SaxEvent&gt; <span class="title">recordEvents</span><span class="params">(InputSource inputSource)</span> <span class="keyword">throws</span> JoranException </span>&#123;</span><br><span class="line">    SAXParser saxParser = buildSaxParser();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        saxParser.parse(inputSource, <span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">return</span> saxEventList;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException ie) &#123;</span><br><span class="line">        handleError(<span class="string">"I/O error occurred while parsing xml file"</span>, ie);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SAXException se) &#123;</span><br><span class="line">        <span class="comment">// Exception added into StatusManager via Sax error handling. No need to add it again</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> JoranException(<span class="string">"Problem parsing XML document. See previously reported errors."</span>, se);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">        handleError(<span class="string">"Unexpected exception while parsing XML document."</span>, ex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"This point can never be reached"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleError</span><span class="params">(String errMsg, Throwable t)</span> <span class="keyword">throws</span> JoranException </span>&#123;</span><br><span class="line">    addError(errMsg, t);</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> JoranException(errMsg, t);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">error</span><span class="params">(SAXParseException spe)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">    addError(XML_PARSING + <span class="string">" - Parsing error on line "</span> + spe.getLineNumber() + <span class="string">" and column "</span> + spe.getColumnNumber());</span><br><span class="line">    addError(spe.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fatalError</span><span class="params">(SAXParseException spe)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">    addError(XML_PARSING + <span class="string">" - Parsing fatal error on line "</span> + spe.getLineNumber() + <span class="string">" and column "</span> + spe.getColumnNumber());</span><br><span class="line">    addError(spe.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">warning</span><span class="params">(SAXParseException spe)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">    addWarn(XML_PARSING + <span class="string">" - Parsing warning on line "</span> + spe.getLineNumber() + <span class="string">" and column "</span> + spe.getColumnNumber(), spe);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ContextAware的子类SimpleRuleStore：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRule</span><span class="params">(ElementSelector elementSelector, String actionClassName)</span> </span>&#123;</span><br><span class="line">    Action action = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        action = (Action) OptionHelper.instantiateByClassName(actionClassName, Action.class, context);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        addError(<span class="string">"Could not instantiate class ["</span> + actionClassName + <span class="string">"]"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (action != <span class="keyword">null</span>) &#123;</span><br><span class="line">        addRule(elementSelector, action);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ContextAware的子类InterpretationContext：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void addInPlayListener(InPlayListener ipl) &#123;</span><br><span class="line">    if (listenerList.contains(ipl)) &#123;</span><br><span class="line">        addWarn(&quot;InPlayListener &quot; + ipl + &quot; has been already registered&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        listenerList.add(ipl);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="6-问题及收获"><a href="#6-问题及收获" class="headerlink" title="6.问题及收获"></a><strong>6.问题及收获</strong></h2><p><strong>问题</strong><br>    logback如何针对一个模块编写单元测试（如status-print，propertyAction，TrivialConfigurator等），它拆分的模块如何简化测试的难度，单元测试的一些技巧等。<br>    针对status-print的设计理念是什么，要解决那些问题，解决具体问题的相关代码，进行了那些性能优化、那些设计增强了灵活性、设计上的取舍（如确定status中应该具有的那6个标记日志的属性，日志级别只有info,warn,error三级这样可以最大限度的满足现有需求吗）。<br>    模块代码组织的包层级设计如何清晰明了及设计理念。<br>    对上下文对象Context在框架中如何使用，如何赋值和扩散（参考PropertyActionTest和TrivialConfiguratorTest测试对Context的处理，以及这样处理对测试带来的便利）。</p>
+<p><strong>收获</strong><br>    根据模块的单元测试可以观察框架这个模块关注的重要功能点，辅助对模块源码的理解。<br>    把一个大的功能划分为功能相对独立的模块来理解，各个击破，这样画的类图和时序图更简洁有针对性，一目了然。<br>    blog对关键代码的理解，最好能带有代码，可以从其他优秀技术博文中借鉴思路。<br>    把日志封装到Status对象中，这样就可以实现日志的保存，实现根据指定的时间阈值过滤指定级别的日志是否存在，并据此作出接下来处理需求。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public final void doConfigure(final InputSource inputSource) throws JoranException &#123;</span><br><span class="line"></span><br><span class="line">    long threshold = System.currentTimeMillis();</span><br><span class="line">    // if (!ConfigurationWatchListUtil.wasConfigurationWatchListReset(context)) &#123;</span><br><span class="line">    // informContextOfURLUsedForConfiguration(getContext(), null);</span><br><span class="line">    // &#125;</span><br><span class="line">    SaxEventRecorder recorder = new SaxEventRecorder(context);</span><br><span class="line">    recorder.recordEvents(inputSource);</span><br><span class="line">    doConfigure(recorder.saxEventList);</span><br><span class="line">    // no exceptions a this level</span><br><span class="line">    // 解析完文档，判断是否有Error级别的日志，据此输出解析是否成功</span><br><span class="line">    StatusUtil statusUtil = new StatusUtil(context);</span><br><span class="line">    if (statusUtil.noXMLParsingErrorsOccurred(threshold)) &#123;</span><br><span class="line">        addInfo(&quot;Registering current configuration as safe fallback point&quot;);</span><br><span class="line">        registerSafeConfiguration(recorder.saxEventList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
 
-        <div class="article-info info-on-right">
-          
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -183,191 +216,117 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://dinglianju.github.io/2019/02/26/20190226_logback_joran_statusPrint/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/20190225_logback_joran_interpreter_match_action/" class="archive-article-date">
-  	<time datetime="2019-02-25T08:43:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/25/20190225_logback_joran_interpreter_match_action/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">joran的interpreter解析器解析SaxEvent及匹配Action</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/20190225_logback_joran_interpreter_match_action/">joran的interpreter解析器解析SaxEvent及匹配Action</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://dinglianju.github.io/2019/02/26/20190226_logback_joran_statusPrint/", 
+    sourceId: "20190226_logback_joran_statusPrint",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logback</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/21/20190221_logback_joran_sax/" class="archive-article-date">
-  	<time datetime="2019-02-21T05:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/21/20190221_logback_joran_sax/">joran中使用SAX解析xml部分内容</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logback</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sax</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">jaxp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/15/20190215_logback_joran_configurator/" class="archive-article-date">
-  	<time datetime="2019-02-15T08:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/15/20190215_logback_joran_configurator/">logback中配置解析组件joran源码解析</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">logback</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/14/20190214_hexo-blog/" class="archive-article-date">
-  	<time datetime="2019-02-14T05:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/14/20190214_hexo-blog/">blog搭建过程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -390,8 +349,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
